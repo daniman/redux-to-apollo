@@ -1,28 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ApolloProvider } from 'react-apollo';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import './index.css';
-import App from './App';
+import App from './containers/App';
 import keys from './keys';
 
-const cache = new InMemoryCache();
-const link = new HttpLink({
-  uri: 'https://api.github.com/graphql',
-  headers: {
-    Authorization: `bearer ${keys.github}`
-  }
-});
 const client = new ApolloClient({
-  cache,
-  link
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'https://api.github.com/graphql',
+    headers: {
+      Authorization: `bearer ${keys.github}`
+    }
+  })
 });
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </ApolloProvider>,
   document.getElementById('root')
 );
