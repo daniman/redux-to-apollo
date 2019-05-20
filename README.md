@@ -20,3 +20,16 @@ Then:
 npm install
 npm start
 ```
+
+Lastly, and this is a HUGE HACK. You'll need to "cmd-click" the `useQuery` hook from `RepoPage.tsx` file to hop to the `useQuery.d.ts` file in your `node_modules`. Then, just change the contents of that file to this:
+
+```
+import { QueryResult } from '@apollo/react-common';
+import { DocumentNode } from 'graphql';
+export declare function useQuery<TData = any, TVariables = any>(
+  query: DocumentNode,
+  props?: any
+): QueryResult<TData, TVariables>;
+```
+
+This adds TypeScript support to our Apollo `useQuery` hook :) We'll find a better way to do this in the future.
