@@ -8,7 +8,7 @@ export default {
 };
 ```
 
-Then create a `.env` file at the root of your project with the following content:
+Then visit [this graph in Engine](https://engine.apollographql.com/service/github/settings) and create a `.env` file at the root of your project with one if its API keys:
 
 ```
 ENGINE_API_KEY=<ENGINE_API_KEY>
