@@ -8,7 +8,7 @@ export default {
 };
 ```
 
-Then visit [this graph in Engine](https://engine.apollographql.com/service/github/settings) and create a `.env` file at the root of your project with one if its API keys:
+Then, visit [this graph in Engine](https://engine.apollographql.com/service/github/settings) and create a `.env` file at the root of your project with one if its API keys:
 
 ```
 ENGINE_API_KEY=<ENGINE_API_KEY>
@@ -18,7 +18,6 @@ Then:
 
 ```
 npm install
-npm start
 ```
 
 Lastly, and this is a HUGE HACK. You'll need to "cmd-click" the `useQuery` hook from `RepoPage.tsx` file to hop to the `useQuery.d.ts` file in your `node_modules`. Then, just change the contents of that file to this:
@@ -32,4 +31,12 @@ export declare function useQuery<TData = any, TVariables = any>(
 ): QueryResult<TData, TVariables>;
 ```
 
-This adds TypeScript support to our Apollo `useQuery` hook :) We'll find a better way to do this in the future.
+This adds TypeScript support to our Apollo `useQuery` hook. We'll find a better way to do this in the future.
+
+Then:
+
+```
+https://github.com/daniman/redux-to-apollo
+```
+
+With any luck, you'll be up and running :)
