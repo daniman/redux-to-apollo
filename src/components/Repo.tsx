@@ -1,7 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Repo = ({ name, description, owner }) => {
+interface OwnerType {
+  login: string;
+}
+
+interface Repo {
+  name: string;
+  description: string | null;
+  owner: OwnerType;
+}
+
+const Repo = ({ name, description, owner }: Repo) => {
   const { login } = owner;
 
   return (

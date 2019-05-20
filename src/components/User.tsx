@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const User = ({ login, avatarUrl, name }) => (
+interface User {
+  login: string;
+  avatarUrl: string;
+  name: string | null;
+}
+
+const User = ({ login, avatarUrl, name }: User) => (
   <div>
     <Link to={`/${login}`}>
       <img src={avatarUrl} alt={login} width="72" height="72" />
