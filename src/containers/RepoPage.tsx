@@ -4,9 +4,9 @@ import { RouteComponentProps } from 'react-router-dom';
 import gql from 'graphql-tag';
 import User from '../components/User';
 import Repo from '../components/Repo';
-import { RepoRouteParams } from '../App';
 
 import * as Types from '../../__generated__/Repository';
+import { QueryResult } from '@apollo/react-common';
 const REPO_QUERY = gql`
   query Repository($name: String!, $owner: String!) {
     repository(name: $name, owner: $owner) {
@@ -29,14 +29,22 @@ const REPO_QUERY = gql`
   }
 `;
 
+interface RepoRouteParams {
+  owner: string;
+  name: string;
+}
+
 const RepoPage = ({
   match: {
     params: { name, owner }
   }
 }: RouteComponentProps<RepoRouteParams>) => {
-  const { loading, data, error } = useQuery<Types.Repository>(REPO_QUERY, {
-    variables: { name, owner }
-  });
+  const { loading, data, error }: QueryResult<Types.Repository> = useQuery(
+    REPO_QUERY,
+    {
+      variables: { name, owner }
+    }
+  );
 
   if (loading) return <div>Loading...</div>;
   if (error || !data || !data.repository)

@@ -20,6 +20,7 @@ export interface User_user {
    * A URL pointing to the user's public avatar.
    */
   avatarUrl: any;
+  isTrueKing: boolean | null;
 }
 
 export interface User {
