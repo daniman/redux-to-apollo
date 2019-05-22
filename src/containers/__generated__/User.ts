@@ -16,11 +16,6 @@ export interface User_user {
    * The user's public profile name.
    */
   name: string | null;
-  /**
-   * A URL pointing to the user's public avatar.
-   */
-  avatarUrl: any;
-  isTrueKing: boolean | null;
 }
 
 export interface User {
