@@ -1,12 +1,7 @@
-import gql from 'graphql-tag';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloClient } from 'apollo-client';
 import keys from './keys';
-
-
-
-
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -17,10 +12,5 @@ const client = new ApolloClient({
     }
   })
 });
-
-
-
-
-
 
 export default client;
