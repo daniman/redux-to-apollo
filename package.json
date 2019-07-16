@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "codegen:watch": "npx apollo client:codegen --target=typescript --watch"
+    "apollo:codegen": "npx apollo client:codegen --target=typescript --watch --outputFlat src/types.ts"
   },
   "eslintConfig": {
     "extends": "react-app"

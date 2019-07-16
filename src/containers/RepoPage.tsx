@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import User from '../components/User';
 import Repo from '../components/Repo';
 
-import * as Types from '../../__generated__/Repository';
+import * as Types from '../types';
 import { QueryResult } from '@apollo/react-common';
 const REPO_QUERY = gql`
   query Repository($name: String!, $owner: String!) {
