@@ -1,5 +1,14 @@
+const keys = require('./src/keys');
+
 module.exports = {
   client: {
-    service: 'github@current'
+    service: {
+      name: 'github',
+      url: 'https://api.github.com/graphql',
+      headers: {
+        Authorization: `bearer ${keys.github}`
+      },
+      skipSSLValidation: true
+    }
   }
 };

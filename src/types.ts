@@ -7,7 +7,7 @@
 // ====================================================
 
 export interface Repository_repository_owner {
-  __typename: "Organization" | "User";
+  __typename: "User" | "Organization";
   /**
    * The username used to login.
    */
