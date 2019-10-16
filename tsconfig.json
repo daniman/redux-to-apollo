@@ -16,5 +16,6 @@
     "noEmit": true,
     "jsx": "preserve"
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
+  "exclude": ["src/keys.js"]
 }
