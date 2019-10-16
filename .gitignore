@@ -2,16 +2,9 @@
 
 .env
 /src/keys.js
-index.complete.js
-UserPage.*.tsx
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
 
 # production
 /build

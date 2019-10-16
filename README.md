@@ -1,6 +1,15 @@
-An example app with Apollo and TypeScript built using `create-react-app`. To run, you'll need a GitHub personal access token and an Apollo API key.
+## GraphQL + React + TypeScript with Apollo
 
-First, get a [GitHub personal access token](https://github.com/settings/tokens) and create a file called `src/key.js` with the following content:
+Simple app built on the GitHub GraphQL API with React, Apollo, and TypeScript. Project bootstrapped with `create-react-app`.
+
+Before you can run the app, you'll need to:
+
+- Get a _GitHub personal access token_
+- Get an _Apollo API key_
+
+#### GitHub personal access token
+
+Get a (personal access token from your GitHub account)[https://github.com/settings/tokens], create a file called `src/key.js`, and put your token in it like so:
 
 ```
 export default {
@@ -8,35 +17,39 @@ export default {
 };
 ```
 
-Then, visit [this graph in Engine](https://engine.apollographql.com/service/github/settings) and create a `.env` file at the root of your project with one if its API keys:
+#### Apollo API key
+
+To get the full value of schema intellisense from the Apollo VS Code extension, you'll want to set up a graph in Apollo's graph manager and point your VS Code editor to that graph by creating an `apollo.config.js` file in your repository. We will follow the steps for that here using the GitHub GraphQL API.
+
+_1. Create a graph in Graph Manager to get an Apollo API key._
+
+First, [log in to Apollo Graph Manager](https://engine.apollographql.com) and follow the steps through the creation of your account. Then click "Create your first graph".
+
+The first step of creating a graph in Graph Manager is to push your schema. Since we're using the GitHub API, you can run the following command (substituting in your new graph's API key and your GitHub access token):
+
+```
+npx apollo service:push \
+--endpoint=https://api.github.com/graphql \
+--key="service:aaaaaa:bbCCdd_APOLLO_API_KEY_eeFFgg" \
+--header="Authorization: bearer aaBBccDDeeee_YOUR_GITHUB_TOKEN_eeeeZZ"
+```
+
+Once your graph is set up on Graph Manager, we can configure your VS Code editor's to look at the schema you've just pushed and become "GraphQL intelligent".
+
+To do so, create a `.env` file in the root of your project and put your graph's API key in it:
 
 ```
 ENGINE_API_KEY=<ENGINE_API_KEY>
 ```
 
-Then:
+Then you'll be ready to run the app!
+
+> > It's important to rememeber that your GitHub access token is extremely valuable and something you should keep a secret. While it's OK to use it in local development in the way I've described, you should _NOT_ host this app anywhere publicly. If you do, your personal GitHub token will be leaked. If you want to host this app publicly, you will need to integrate your app with GitHub OAuth so that your personal access token does not end up in your JavaScript bundle.
+
+### Running the app
+
+To run the app:
 
 ```
-npm install
+npm install && npm start
 ```
-
-Lastly, and this is a HUGE HACK. You'll need to "cmd-click" the `useQuery` hook from `RepoPage.tsx` file to hop to the `useQuery.d.ts` file in your `node_modules`. Then, just change the contents of that file to this:
-
-```
-import { QueryResult } from '@apollo/react-common';
-import { DocumentNode } from 'graphql';
-export declare function useQuery<TData = any, TVariables = any>(
-  query: DocumentNode,
-  props?: any
-): QueryResult<TData, TVariables>;
-```
-
-This adds TypeScript support to our Apollo `useQuery` hook. We'll find a better way to do this in the future.
-
-Then:
-
-```
-https://github.com/daniman/redux-to-apollo
-```
-
-With any luck, you'll be up and running :)
