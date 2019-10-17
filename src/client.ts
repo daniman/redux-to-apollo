@@ -1,7 +1,7 @@
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloClient } from 'apollo-client';
-const keys = require('./keys');
+import keys from './keys';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
