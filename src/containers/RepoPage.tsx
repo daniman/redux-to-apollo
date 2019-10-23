@@ -1,12 +1,11 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { RouteComponentProps } from 'react-router-dom';
 import gql from 'graphql-tag';
 import User from '../components/User';
 import Repo from '../components/Repo';
 
 import * as Types from '../types';
-import { QueryResult } from '@apollo/react-common';
 const REPO_QUERY = gql`
   query Repository($name: String!, $owner: String!) {
     repository(name: $name, owner: $owner) {
@@ -39,7 +38,7 @@ const RepoPage = ({
     params: { name, owner }
   }
 }: RouteComponentProps<RepoRouteParams>) => {
-  const { loading, data, error }: QueryResult<Types.Repository> = useQuery(
+  const { loading, data, error } = useQuery<Types.Repository>(
     REPO_QUERY,
     {
       variables: { name, owner }

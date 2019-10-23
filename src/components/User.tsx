@@ -1,14 +1,5 @@
 import React from 'react';
-// import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
-
-// const QUERY = gql`
-//   query hello {
-//     user(login: ) {
-
-//     }
-//   }
-// `;
 
 interface User {
   login: string;

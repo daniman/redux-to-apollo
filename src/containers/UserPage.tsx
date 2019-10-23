@@ -2,6 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import User from '../components/User';
 import { PageTypes } from '../App';
+import { useQuery } from '@apollo/client';
 
 const USER_QUERY = gql`
   query User($login: String!) {
@@ -15,9 +16,9 @@ const USER_QUERY = gql`
 const UserPage = ({ login }: PageTypes) => {
   return (
     <User
-      name="Jon Snow"
-      login="trueking"
-      avatarUrl="https://bit.ly/2QclPMo"
+      name="Demo Doge"
+      login="demodog"
+      avatarUrl="https://i.imgflip.com/3e31zq.jpg"
     />
   )
 };
