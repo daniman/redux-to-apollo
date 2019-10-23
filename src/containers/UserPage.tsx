@@ -2,7 +2,6 @@ import React from 'react';
 import gql from 'graphql-tag';
 import User from '../components/User';
 import { PageTypes } from '../App';
-import { useQuery } from '@apollo/client';
 
 const USER_QUERY = gql`
   query User($login: String!) {
