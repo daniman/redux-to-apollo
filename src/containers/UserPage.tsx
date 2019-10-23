@@ -22,5 +22,4 @@ const UserPage = ({ login }: PageTypes) => {
   )
 };
 
-
 export default UserPage;
