@@ -5,22 +5,22 @@ interface User {
   login: string;
   avatarUrl: string;
   name: string | null;
-  isTrueKing?: boolean | null;
+  costume?: 'dragon' | 'unicorn';
 }
 
-const User = ({ login, avatarUrl, name, isTrueKing }: User) => (
+const User = ({ login, avatarUrl, name, costume }: User) => (
   <div>
-    {isTrueKing === false ? (
+    {costume === 'dragon' ? (
       <div>
         <span role="img" aria-label="crown" style={{ fontSize: 50 }}>
-          ❌
+          🐉
         </span>
       </div>
     ) : null}
-    {isTrueKing === true ? (
+    {costume === 'unicorn' ? (
       <div>
         <span role="img" aria-label="crown" style={{ fontSize: 50 }}>
-          👑
+          🦄
         </span>
       </div>
     ) : null}
