@@ -5,7 +5,7 @@ interface User {
   login: string;
   avatarUrl: string;
   name: string | null;
-  costume?: 'dragon' | 'unicorn';
+  costume?: string;
 }
 
 const User = ({ login, avatarUrl, name, costume }: User) => (
