@@ -12,7 +12,7 @@ const USER_QUERY = gql`
   }
 `;
 
-const UserPage = ({ login }: PageTypes) => {
+const UserPage: React.FC<PageTypes> = ({ login }) => {
   return (
     <User
       name="Demo Doge"
