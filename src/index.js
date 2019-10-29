@@ -4,8 +4,22 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import keys from './keys';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import gql from 'graphql-tag';
+
+gql`
+  extend type User {
+    costume: String!
+  }
+`;
+
+const resolvers = {
+  User: {
+    costume: () => (Math.random() > 0.5 ? 'dragon' : 'unicorn')
+  }
+};
 
 const client = new ApolloClient({
+  resolvers,
   uri: 'https://api.github.com/graphql',
   headers: {
     authorization: `bearer ${keys.github}`

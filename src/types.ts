@@ -88,6 +88,11 @@ export interface UserDetails_user {
    * The user's public profile name.
    */
   name: string | null;
+  /**
+   * A URL pointing to the user's public avatar.
+   */
+  avatarUrl: any;
+  costume: string;
 }
 
 export interface UserDetails {
