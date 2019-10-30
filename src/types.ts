@@ -75,10 +75,10 @@ export interface RepositoryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: User
+// GraphQL query operation: UserDetails
 // ====================================================
 
-export interface User_user {
+export interface UserDetails_user {
   __typename: "User";
   /**
    * The username used to login.
@@ -90,14 +90,14 @@ export interface User_user {
   name: string | null;
 }
 
-export interface User {
+export interface UserDetails {
   /**
    * Lookup a user by login.
    */
-  user: User_user | null;
+  user: UserDetails_user | null;
 }
 
-export interface UserVariables {
+export interface UserDetailsVariables {
   login: string;
 }
 

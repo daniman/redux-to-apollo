@@ -4,7 +4,7 @@ import User from '../components/User';
 import { PageTypes } from '../App';
 
 const USER_QUERY = gql`
-  query User($login: String!) {
+  query UserDetails($login: String!) {
     user(login: $login) {
       login
       name
