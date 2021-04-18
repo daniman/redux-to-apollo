@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import React, { useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 
 const Explore = ({ history, location }: RouteComponentProps) => {
   const [login, setLogin] = useState(location.pathname.substring(1));
@@ -17,11 +17,19 @@ const Explore = ({ history, location }: RouteComponentProps) => {
   };
 
   return (
-    <div>
-      <p>Type a username or repo full name and hit 'Go':</p>
-      <input size={45} defaultValue={login} onKeyUp={onKeyUp} />
-      <button onClick={submit}>Go!</button>
-    </div>
+    <input
+      size={45}
+      defaultValue={login}
+      onKeyUp={onKeyUp}
+      placeholder="username"
+      style={{
+        fontSize: 14,
+        outline: "none",
+        border: "none",
+        borderBottom: "1px solid #eee",
+        width: "100%",
+      }}
+    />
   );
 };
 

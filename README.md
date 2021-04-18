@@ -46,3 +46,9 @@ To run the app:
 ```
 npm install && npm start
 ```
+
+If you're making changes to your queries and want TypeScript types to be generated for you, start this process (it'll watch your files and keep running and generating new types for you as long as it's running):
+
+```
+npm run apollo:codegen
+```
