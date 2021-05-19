@@ -3,81 +3,59 @@ import { PageTypes } from "../App";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCodeBranch, faStar } from "@fortawesome/free-solid-svg-icons";
 import { gql, useQuery } from "@apollo/client";
-import * as Types from '../types';
+import * as Types from "../types";
 
 const UserPage: React.FC<PageTypes> = ({ userLogin }) => {
-  const data: Types.DemoQuery = {
-    user: {
-      __typename: "User",
-      name: "Hello World",
-      login: "Hello World",
-      avatarUrl: "https://i.imgur.com/n2c44i5.jpg",
-      repositories: {
-        __typename: "RepositoryConnection",
-        edges: [
-          { __typename: "RepositoryEdge", node: { __typename: "Repository", primaryLanguage: { __typename: "Language", color: "#ccc", name: "Hello World" }, name: "Hello World", description: "Hello World", issues: { __typename: "IssueConnection", totalCount: 34 }, stargazers: { __typename: "StargazerConnection", totalCount: 7 } } },
-          { __typename: "RepositoryEdge", node: { __typename: "Repository", primaryLanguage: { __typename: "Language", color: "#ccc", name: "Hello World" }, name: "Hello World", description: "Hello World", issues: { __typename: "IssueConnection", totalCount: 34 }, stargazers: { __typename: "StargazerConnection", totalCount: 7 } } },
-          { __typename: "RepositoryEdge", node: { __typename: "Repository", primaryLanguage: { __typename: "Language", color: "#ccc", name: "Hello World" }, name: "Hello World", description: "Hello World", issues: { __typename: "IssueConnection", totalCount: 34 }, stargazers: { __typename: "StargazerConnection", totalCount: 7 } } },
-          { __typename: "RepositoryEdge", node: { __typename: "Repository", primaryLanguage: { __typename: "Language", color: "#ccc", name: "Hello World" }, name: "Hello World", description: "Hello World", issues: { __typename: "IssueConnection", totalCount: 34 }, stargazers: { __typename: "StargazerConnection", totalCount: 7 } } },
-          { __typename: "RepositoryEdge", node: { __typename: "Repository", primaryLanguage: { __typename: "Language", color: "#ccc", name: "Hello World" }, name: "Hello World", description: "Hello World", issues: { __typename: "IssueConnection", totalCount: 34 }, stargazers: { __typename: "StargazerConnection", totalCount: 7 } } },
-        ]
+  const { data, loading } = useQuery<Types.DemoQuery, Types.DemoQueryVariables>(
+    gql`
+      query DemoQuery($userLogin: String!) {
+        user(login: $userLogin) {
+          name
+          login
+          avatarUrl
+          repositories(last: 20) {
+            edges {
+              node {
+                primaryLanguage {
+                  color
+                  name
+                }
+                name
+                description
+                issues {
+                  totalCount
+                }
+                stargazers {
+                  totalCount
+                }
+              }
+            }
+          }
+        }
       }
-    }
-  }
+    `,
+    { variables: { userLogin } }
+  );
 
+  if (loading) return <div>Loading...</div>;
   if (!data || !data.user) return <div>User not found</div>;
 
   return (
     <div className="page">
-      <img
-        src={data.user.avatarUrl}
-        className="avatar"
-      />
+      <img src={data.user.avatarUrl} className="avatar" />
       <div className="name">{data.user.name}</div>
       <div className="login">{data.user.login}</div>
-      {data.user.repositories.edges && data.user.repositories.edges.map((edge) => (
-        <Repository node={edge && edge.node} />
-      ))}
+      {data.user.repositories.edges &&
+        data.user.repositories.edges.map((edge) => (
+          <Repository node={edge && edge.node} />
+        ))}
     </div>
   );
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const Repository: React.FC<{ node?: Types.DemoQuery_user_repositories_edges_node | null }> = ({ node }) => {
+const Repository: React.FC<{
+  node?: Types.DemoQuery_user_repositories_edges_node | null;
+}> = ({ node }) => {
   if (!node) return null;
   return (
     <div
@@ -120,10 +98,13 @@ const Repository: React.FC<{ node?: Types.DemoQuery_user_repositories_edges_node
           <div
             className="color-patch"
             style={{
-              backgroundColor: node.primaryLanguage && node.primaryLanguage.color || "#fff",
+              backgroundColor:
+                (node.primaryLanguage && node.primaryLanguage.color) || "#fff",
             }}
           />
-          <span className="value">{node.primaryLanguage && node.primaryLanguage.name}</span>
+          <span className="value">
+            {node.primaryLanguage && node.primaryLanguage.name}
+          </span>
         </div>
         <div className="metadata">
           <FontAwesomeIcon icon={faCodeBranch} />
@@ -136,7 +117,7 @@ const Repository: React.FC<{ node?: Types.DemoQuery_user_repositories_edges_node
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default UserPage;
